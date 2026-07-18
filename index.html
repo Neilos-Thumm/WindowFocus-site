@@ -65,7 +65,7 @@ nav .links a:hover{color:var(--text);text-decoration:none}
 .demo{position:relative;user-select:none}
 .demo-hint{text-align:center;font-size:14px;color:var(--muted);margin-bottom:18px}
 .demo-hint kbd{display:inline-block;min-width:26px;text-align:center;padding:3px 7px;border-radius:6px;background:var(--keycap);border:1px solid var(--line);border-bottom-width:3px;font-size:12.5px;color:var(--text)}
-.stage{position:relative;height:290px}
+.stage{position:relative;height:322px}
 .win{
   position:absolute;left:0;right:0;margin:auto;width:88%;
   background:var(--paper-dim);border-radius:10px;
@@ -78,11 +78,17 @@ nav .links a:hover{color:var(--text);text-decoration:none}
 .win .lights i{width:11px;height:11px;border-radius:50%;background:#b9c0cf}
 .win .title{font-family:"JetBrains Mono",monospace;font-size:12.5px;color:#3a4459;margin-left:6px}
 .win .title b{color:#1f2740;font-weight:700}
-.win .body{height:120px;padding:14px;display:flex;flex-direction:column;gap:9px}
+.win .body{height:210px;padding:16px;display:flex;flex-direction:column;gap:11px}
 .win .body span{display:block;height:9px;border-radius:4px;background:rgba(20,30,55,.12)}
 .win .body span:nth-child(1){width:72%}
 .win .body span:nth-child(2){width:88%}
 .win .body span:nth-child(3){width:55%}
+.win .body span:nth-child(4){width:80%}
+.win .body span:nth-child(5){width:64%}
+.win .body span:nth-child(6){width:42%}
+.win .body span:nth-child(7){width:76%}
+.win .body span:nth-child(8){width:59%}
+.win .body span:nth-child(9){width:84%}
 .win.focused{background:var(--paper);border-color:var(--focus);box-shadow:0 26px 60px rgba(0,0,0,.6),0 0 0 4px rgba(77,163,255,.22)}
 .win.focused .lights i:nth-child(1){background:#ff5f57}
 .win.focused .lights i:nth-child(2){background:#febc2e}
@@ -98,6 +104,12 @@ nav .links a:hover{color:var(--text);text-decoration:none}
 .keys button.pressed{transform:translateY(2px);border-bottom-width:2px;border-color:var(--focus);color:var(--focus)}
 .combo{ text-align:center;margin-top:14px;font-size:13px;color:var(--muted)}
 .combo kbd{padding:2px 6px;border-radius:5px;background:var(--keycap);border:1px solid var(--line);font-size:11.5px}
+
+/* sibling teaser */
+.teaser{border-top:1px solid var(--line);padding:34px 0;text-align:center;font-size:14px;color:var(--muted)}
+.teaser a{color:var(--text);border-bottom:1px dotted var(--muted);text-decoration:none}
+.teaser a:hover{color:var(--focus);border-bottom-color:var(--focus);text-decoration:none}
+.teaser em{font-style:italic}
 
 /* ---------- sections ---------- */
 section{padding:74px 0;border-top:1px solid var(--line)}
@@ -216,7 +228,7 @@ footer .mono{font-size:13px}
   .steps{grid-template-columns:1fr}
   .audit{grid-template-columns:1fr;gap:36px}
   nav .links{display:none}
-  .stage{height:250px}
+  .stage{height:305px}
 }
 @media (prefers-reduced-motion: reduce){
   .win,.keys button{transition:none}
@@ -259,15 +271,15 @@ footer .mono{font-size:13px}
       <div class="stage" id="stage">
         <div class="win" data-n="1">
           <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="title"><b>1</b> Research</span></div>
-          <div class="body"><span></span><span></span><span></span></div>
+          <div class="body"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
         <div class="win" data-n="2">
           <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="title"><b>2</b> Writing</span></div>
-          <div class="body"><span></span><span></span><span></span></div>
+          <div class="body"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
         <div class="win" data-n="3">
           <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="title"><b>3</b> Music</span></div>
-          <div class="body"><span></span><span></span><span></span></div>
+          <div class="body"><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span></div>
         </div>
       </div>
       <div class="keys" role="group" aria-label="Demo keys">
@@ -408,11 +420,15 @@ swiftc bravefocus.swift -o bravefocus -framework Cocoa -framework Carbon
   </div>
 </section>
 
+<div class="teaser">
+  <div class="wrap">WindowFocus gets you to the exact window. <a href="https://appfocus.nileparun.com/">AppFocus</a> gets you to <em>any</em> app on your Mac — same maker, same ~100 lines.</div>
+</div>
+
 <footer>
   <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:0 24px">
     <div class="brand" style="font-size:15px"><span class="dot" style="width:8px;height:8px"></span>WindowFocus</div>
     <div class="mono">Made by <a href="https://github.com/Neilos-Thumm/">Neilos-Thumm</a> · MIT · no telemetry, obviously</div>
-    <div><a href="https://github.com/Neilos-Thumm/WindowFocus">WindowFocus</a> · <a href="https://github.com/Neilos-Thumm/BraveFocus">BraveFocus</a></div>
+    <div><a href="https://github.com/Neilos-Thumm/WindowFocus">WindowFocus</a> · <a href="https://github.com/Neilos-Thumm/AppFocus">AppFocus</a></div>
   </div>
 </footer>
 
