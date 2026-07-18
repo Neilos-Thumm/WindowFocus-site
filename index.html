@@ -163,6 +163,36 @@ pre.code .cm{color:#5c6a82}
 .install .note{margin-top:16px;font-size:14px;color:var(--muted)}
 .install .note b{color:var(--warn);font-weight:500}
 
+/* floating browser badges */
+.badge-strip{display:flex;justify-content:center;gap:34px;margin:46px 0 8px;flex-wrap:wrap}
+.badge{display:flex;flex-direction:column;align-items:center;gap:10px;animation:floaty 5.2s ease-in-out infinite}
+.badge:nth-child(2){animation-delay:-1s}
+.badge:nth-child(3){animation-delay:-2.1s}
+.badge:nth-child(4){animation-delay:-3.2s}
+.badge:nth-child(5){animation-delay:-4.1s}
+.badge:nth-child(6){animation-delay:-1.6s}
+.badge .disc{
+  width:72px;height:72px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 32% 28%, rgba(255,255,255,.16), rgba(255,255,255,.02) 58%), var(--ink-2);
+  border:1px solid var(--line);position:relative;
+}
+.badge .disc svg{width:38px;height:38px}
+.badge .disc img{
+  width:40px;height:40px;display:block;
+  object-fit:contain;
+}
+.badge .disc::after{content:"";position:absolute;inset:-1px;border-radius:50%;box-shadow:0 0 26px var(--glow, transparent);opacity:.55;pointer-events:none}
+.badge .bname{font-family:"JetBrains Mono",monospace;font-size:12px;color:var(--muted)}
+.badge.verified .bname{color:var(--ok)}
+.badge.verified .disc{border-color:rgba(99,211,135,.45)}
+@keyframes floaty{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-9px)}
+}
+@media (prefers-reduced-motion: reduce){
+  .badge{animation:none}
+}
+
 /* browsers */
 .browsers table{width:100%;margin-top:38px;border-collapse:collapse;font-size:15.5px}
 .browsers th{font-family:"JetBrains Mono",monospace;font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);text-align:left;padding:0 14px 12px;font-weight:500}
@@ -225,8 +255,7 @@ footer .mono{font-size:13px}
       <p class="fineprint">One file. No dependencies. No network. MIT licensed.</p>
     </div>
 
-    <div class="demo" aria-label="Interactive demo: press 1, 2 or 3 to focus a window">
-      <p class="demo-hint">Try it — press <kbd>1</kbd> <kbd>2</kbd> <kbd>3</kbd> on your keyboard</p>
+    <div class="demo" aria-label="Interactive demo: focus a window">
       <div class="stage" id="stage">
         <div class="win" data-n="1">
           <div class="bar"><span class="lights"><i></i><i></i><i></i></span><span class="title"><b>1</b> Research</span></div>
@@ -340,6 +369,32 @@ swiftc bravefocus.swift -o bravefocus -framework Cocoa -framework Carbon
   <div class="wrap">
     <p class="eyebrow">Compatibility</p>
     <h2>Chromium's window naming, any Chromium browser</h2>
+    <div class="badge-strip" aria-hidden="true">
+      <div class="badge verified" style="--glow:rgba(251,84,43,.5)">
+        <span class="disc"><img src="imgs/brave.png" alt=""></span>
+        <span class="bname">Brave ✓</span>
+      </div>
+      <div class="badge" style="--glow:rgba(66,133,244,.5)">
+        <span class="disc"><img src="imgs/chrome.png" alt=""></span>
+        <span class="bname">Chrome</span>
+      </div>
+      <div class="badge" style="--glow:rgba(77,163,255,.45)">
+        <span class="disc"><img src="imgs/chromium.png" alt=""></span>
+        <span class="bname">Chromium</span>
+      </div>
+      <div class="badge" style="--glow:rgba(0,169,157,.5)">
+        <span class="disc"><img src="imgs/edge.png" alt=""></span>
+        <span class="bname">Edge</span>
+      </div>
+      <div class="badge" style="--glow:rgba(239,60,57,.5)">
+        <span class="disc"><img src="imgs/vivaldi.png" alt=""></span>
+        <span class="bname">Vivaldi</span>
+      </div>
+      <div class="badge" style="--glow:rgba(255,27,45,.5)">
+        <span class="disc"><img src="imgs/opera.png" alt=""></span>
+        <span class="bname">Opera</span>
+      </div>
+    </div>
     <table>
       <thead><tr><th>Browser</th><th>Status</th><th></th></tr></thead>
       <tbody>
@@ -356,7 +411,7 @@ swiftc bravefocus.swift -o bravefocus -framework Cocoa -framework Carbon
 <footer>
   <div class="wrap" style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:16px;padding:0 24px">
     <div class="brand" style="font-size:15px"><span class="dot" style="width:8px;height:8px"></span>WindowFocus</div>
-    <div class="mono">MIT · no telemetry, obviously</div>
+    <div class="mono">Made by <a href="https://github.com/Neilos-Thumm/">Neilos-Thumm</a> · MIT · no telemetry, obviously</div>
     <div><a href="https://github.com/Neilos-Thumm/WindowFocus">WindowFocus</a> · <a href="https://github.com/Neilos-Thumm/BraveFocus">BraveFocus</a></div>
   </div>
 </footer>
@@ -392,14 +447,6 @@ swiftc bravefocus.swift -o bravefocus -framework Cocoa -framework Carbon
   keys.forEach(function(b){
     b.addEventListener('click', function(){ focusWin(parseInt(b.dataset.key,10)); });
   });
-  document.addEventListener('keydown', function(e){
-    if (e.metaKey || e.ctrlKey || e.altKey) return;
-    var t = e.target.tagName;
-    if (t === 'INPUT' || t === 'TEXTAREA') return;
-    var n = parseInt(e.key,10);
-    if (n >= 1 && n <= 3) focusWin(n);
-  });
-
   layout();
 
   // source dropdown
